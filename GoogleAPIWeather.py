@@ -12,6 +12,8 @@ class GoogleAPIWeather:
 
     IMPERIAL_SYSTEM = 'i'
 
+    MAX_FORECAST_DAYS = 4
+
     CONDITIONS = {
         'Clear':'a',
         'Dust':'7',
@@ -164,3 +166,27 @@ class GoogleAPIWeather:
                 self.__tempList.append(separator.join(temperatures))
 
         return self.__tempList
+
+
+    def forecastDay(self, index = 1):
+        index = int(index)
+        if self.MAX_FORECAST_DAYS > index > 0:
+            return self.forecastDaysList()[index]
+        else:
+            raise IndexError('Google API version %s only provides forecast for %i days including today.' % (self.API_VERSION, self.MAX_FORECAST_DAYS))
+
+
+    def forecastTemperatures(self, index = 1):
+        index = int(index)
+        if self.MAX_FORECAST_DAYS > index > 0:
+            return self.forecastTemperaturesList()[index]
+        else:
+            raise IndexError('Google API version %s only provides forecast for %i days including today.' % (self.API_VERSION, self.MAX_FORECAST_DAYS))
+
+
+    def forecastSymbol(self, index = 1):
+        index = int(index)
+        if self.MAX_FORECAST_DAYS > index > 0:
+            return self.forecastSymbolsList()[index]
+        else:
+            raise IndexError('Google API version %s only provides forecast for %i days including today.' % (self.API_VERSION, self.MAX_FORECAST_DAYS))
