@@ -1,10 +1,17 @@
-# ConkyGoogleWeather
+# ConkyWeather-Py
 
-Since Weather.com closed the free access to their API, the conkyweather extension for [Conky](http://conky.sourceforge.net/) doesn't work anymore.
+Since Weather.com closed the free access to their API, the ```conkyforecast``` extension for [Conky](http://conky.sourceforge.net/) doesn't work anymore.
 
-This a Python (>= 2.7) script to retrieve weather informations using the Google API, designed to be used in [Conky](http://conky.sourceforge.net/) to solve that "_problem_".
+**ConkyWeather-Py** is a Python (2.7) script to retrieve weather informations from other free APIs available on the Internet, designed to be used in [Conky](http://conky.sourceforge.net/) to solve that "_problem_".
 
-It's not fully functional at the moment but you can still get a preview of what it can do by cloning the repository.  
-All you have to do, is opening a terminal in the directory you just cloned into and type ```./main.py``` or ```./main.py Paris``` or ```./main.py 'New york' i``` for example.
+Currently supported APIs are:
+
+* Google API
+* WeatherUnderground API
+
+With those two APIs working, the next line on the TODO list is **writing a documentation**, explaining how to to use it with Conky (i.e. its main goal...) and providing explicit examples (YAY!).   
+(I know this is important, but you know, writing code is far more funnier, so I can't give any ETA)
+
+More APIs can be expected after that.
 
 Last improvements are in the ```develop``` branch.
