@@ -2,15 +2,12 @@
 __author__ = 'MrMitch'
 
 from urllib2 import urlopen, quote
-from xml.dom.minidom import parse
+from xml.dom.minidom import parseString
+from utils.TempConverter import celsiusToFahrenheit, IMPERIAL_SYSTEM, METRIC_SYSTEM
 
-class GoogleAPIWeather:
+class GoogleAPI:
 
     API_VERSION = '1'
-
-    METRIC_SYSTEM = 'm'
-
-    IMPERIAL_SYSTEM = 'i'
 
     MAX_FORECAST_DAYS = 4
 
@@ -53,17 +50,21 @@ class GoogleAPIWeather:
         'Storm':'v'
     }
 
-    def __init__(self, location):
-        self.location = str(location)
+    def __init__(self, location, system = 'm'):
+        self.__location = str(location)
+        self.__setSystem(system)
 
         # ask Google
-        xml = urlopen('http://www.google.com/ig/api?weather=%s&hl=en-gb' % quote(self.location))
-        rawResponse = parse(xml)
-        xml.close()
+        googleSocket = urlopen('http://www.google.com/ig/api?weather=%s&hl=en-gb' % quote(self.__location))
+        # Google sends a one-line file that needs to be decoded from CP1252 & re-encoded in proper UTF-8
+        rawResponse = googleSocket.readline().decode('CP1252').encode('UTF-8')
+        googleSocket.close()
 
-        # we got a reply
-        if rawResponse.hasChildNodes():
-            reply = rawResponse.firstChild
+        response = parseString(rawResponse)
+
+        # we got a correct reply
+        if response.hasChildNodes():
+            reply = response.firstChild
             # if reply is compatible
             if reply.getAttribute('version') == self.API_VERSION :
                 # if there has been no error on Google's side
@@ -71,6 +72,7 @@ class GoogleAPIWeather:
                 if weather.firstChild.tagName != 'problem_cause':
                     self.__currentWeather = weather.getElementsByTagName('current_conditions')[0]
                     self.__forecast = weather.getElementsByTagName('forecast_conditions')
+                    self.__fullLocation = weather.firstChild.firstChild.getAttribute('data')
 
                     self.__tempI = ''
                     self.__tempM = ''
@@ -80,11 +82,8 @@ class GoogleAPIWeather:
                     self.__daysList = []
                     self.__symbolsList = []
                     self.__tempList = []
-
-                    self.__system = self.METRIC_SYSTEM
-
                 else:
-                    raise Exception('Unable to retrieve weather information for location %s' % self.location)
+                    raise Exception('Unable to retrieve weather information for location %s' % self.__location)
             else:
                 raise Exception('API version %s not supported' % reply.getAttribute('version'))
         else:
@@ -98,16 +97,23 @@ class GoogleAPIWeather:
             return '-'
 
     ## SETTER
-    def setSystem(self, system = 'm'):
+
+    def location(self):
+        return self.__location
+
+    def fullLocation(self):
+        return self.__fullLocation
+
+    def __setSystem(self, system = 'm'):
         system = str(system).lower()
-        if system == self.METRIC_SYSTEM or system == self.IMPERIAL_SYSTEM:
+        if system == METRIC_SYSTEM or system == IMPERIAL_SYSTEM:
             self.__system = system
         else:
             raise ValueError('Bad value %s for unit system' % system)
 
     ## Getters
     def temp(self):
-        if self.__system == 'i' :
+        if self.__system == IMPERIAL_SYSTEM :
             if self.__tempI == '':
                 self.__tempI = self.__currentWeather.getElementsByTagName('temp_f')[0].getAttribute('data') + u'°'
             return self.__tempI
@@ -160,9 +166,16 @@ class GoogleAPIWeather:
         separator = str(separator)
         if not len(self.__tempList):
             for forecast in self.__forecast:
-                temperatures = list()
-                temperatures.append(forecast.getElementsByTagName('low')[0].getAttribute('data') + u'°')
-                temperatures.append(forecast.getElementsByTagName('high')[0].getAttribute('data') + u'°')
+                temperatures = []
+                low = forecast.getElementsByTagName('low')[0].getAttribute('data')
+                high = forecast.getElementsByTagName('high')[0].getAttribute('data')
+
+                if self.__system == IMPERIAL_SYSTEM:
+                    low = celsiusToFahrenheit(low)
+                    high = celsiusToFahrenheit(high)
+
+                temperatures.append(str(low) + u'°')
+                temperatures.append(str(high) + u'°')
                 self.__tempList.append(separator.join(temperatures))
 
         return self.__tempList
@@ -170,7 +183,7 @@ class GoogleAPIWeather:
 
     def forecastDay(self, index = 1):
         index = int(index)
-        if self.MAX_FORECAST_DAYS > index > 0:
+        if abs(index) < self.MAX_FORECAST_DAYS:
             return self.forecastDaysList()[index]
         else:
             raise IndexError('Google API version %s only provides forecast for %i days including today.' % (self.API_VERSION, self.MAX_FORECAST_DAYS))
@@ -178,7 +191,7 @@ class GoogleAPIWeather:
 
     def forecastTemperatures(self, index = 1):
         index = int(index)
-        if self.MAX_FORECAST_DAYS > index > 0:
+        if abs(index) < self.MAX_FORECAST_DAYS:
             return self.forecastTemperaturesList()[index]
         else:
             raise IndexError('Google API version %s only provides forecast for %i days including today.' % (self.API_VERSION, self.MAX_FORECAST_DAYS))
@@ -186,7 +199,7 @@ class GoogleAPIWeather:
 
     def forecastSymbol(self, index = 1):
         index = int(index)
-        if self.MAX_FORECAST_DAYS > index > 0:
+        if abs(index) < self.MAX_FORECAST_DAYS:
             return self.forecastSymbolsList()[index]
         else:
             raise IndexError('Google API version %s only provides forecast for %i days including today.' % (self.API_VERSION, self.MAX_FORECAST_DAYS))

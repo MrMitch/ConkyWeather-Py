@@ -2,26 +2,55 @@
 # -*- coding: utf-8 -*-
 __author__ = 'MrMitch'
 
-from GoogleAPIWeather import GoogleAPIWeather
-import sys
+from utils.TempConverter import IMPERIAL_SYSTEM, METRIC_SYSTEM
+from providers.GoogleAPI import GoogleAPI
+from sys import argv, stdout
 
-if len(sys.argv) >= 2:
-    location = sys.argv[1]
-else:
-    location = 'New York'
-    sys.stdout.write('No location specified. ')
+location = 'New York'
+system = METRIC_SYSTEM
 
-print 'Fetching weather for %s' % location
 
-weather = GoogleAPIWeather(location)
+def displayHelp():
+    print 'Usage: ./main.py [-h/--help] [location] [unit-system]'
+    print '\t-h/--help\t Display this message and stop the program'
+    print '\tlocation\t The name of the location where you\' like to know what\'s the weather like'
+    print '\tunit-system\t "m" for Metric unit system, "i" for Imperial unit system'
+    exit()
 
-print '\n## %s\'s current weather ##' % location
-print 'Temp: %s' % weather.temp()
-print 'Humidity: %s' % weather.humidity()
-print 'Condition (full): %s' % weather.textualCondition()
-print 'Condition (symbolic): %s' % weather.symbolicCondition()
 
-print '\n## Forecast for %s ##' % location
-print '     '.join(weather.forecastDaysList())
-print ' '.join(weather.forecastTemperaturesList())
-print ' ' + '       '.join(weather.forecastSymbolsList())
+try:
+    if len(argv) >= 2:
+
+        if argv[1] == '-h' or argv[1] == '--help':
+            displayHelp()
+        else:
+            location = argv[1]
+
+        if len(argv) >= 3:
+            system = argv[2]
+        else:
+            print 'No unit system specified.'
+    else:
+        print 'No location specified.'
+
+    stdout.write('Fetching weather for %s ' % location)
+
+    if system == IMPERIAL_SYSTEM:
+        print 'using imperial unit system'
+    else:
+        print 'using metric unit system'
+
+    weather = GoogleAPI(location, system)
+
+    print '\n## Current weather in %s ##' % weather.fullLocation()
+    print 'Temp: %s' % weather.temp()
+    print 'Humidity: %s' % weather.humidity()
+    print 'Condition (full): %s' % weather.textualCondition()
+    print 'Condition (symbolic): %s' % weather.symbolicCondition()
+    print '\n## Forecast for %s ##' % location
+    print '     '.join(weather.forecastDaysList())
+    print ' '.join(weather.forecastTemperaturesList())
+    print ' ' + '       '.join(weather.forecastSymbolsList())
+
+except Exception:
+    print 'Wrong parameters. Try "./main.py -h" or "./main.py --help" for more information.'
