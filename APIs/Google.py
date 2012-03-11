@@ -85,7 +85,7 @@ class GoogleAPI(BaseAPI):
                     self.__tempsList = []
                     self.__textsList = []
                 else:
-                    raise Exception('Unable to retrieve weather information for location %s' % self.__location)
+                    raise Exception('Unable to retrieve weather information for location %s' % self.location())
             else:
                 raise Exception('API version %s not supported' % reply.getAttribute('version'))
         else:
