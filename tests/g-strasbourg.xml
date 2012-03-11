@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<xml_api_reply version="1">
+	<weather module_id="0" tab_id="0" mobile_row="0" mobile_zipped="1" row="0" section="0">
+		<forecast_information>
+			<city data="Strasbourg, Alsace"/>
+			<postal_code data="strasbourg"/>
+			<latitude_e6 data=""/>
+			<longitude_e6 data=""/>
+			<forecast_date data="2012-03-10"/>
+			<current_date_time data="1970-01-01 00:00:00 +0000"/>
+			<unit_system data="SI"/>
+		</forecast_information>
+		<current_conditions>
+			<condition data="Mostly Cloudy"/>
+			<temp_f data="46"/>
+			<temp_c data="8"/>
+			<humidity data="Humidity: 71%"/>
+			<icon data="/ig/images/weather/mostly_cloudy.gif"/>
+			<wind_condition data="Wind: NW at 6 km/h"/>
+		</current_conditions>
+		<forecast_conditions>
+			<day_of_week data="Sat"/>
+			<low data="6"/>
+			<high data="14"/>
+			<icon data="/ig/images/weather/mostly_sunny.gif"/>
+			<condition data="Mostly Sunny"/>
+		</forecast_conditions>
+		<forecast_conditions>
+			<day_of_week data="Sun"/>
+			<low data="6"/>
+			<high data="13"/>
+			<icon data="/ig/images/weather/mostly_sunny.gif"/>
+			<condition data="Partly Sunny"/>
+		</forecast_conditions>
+		<forecast_conditions>
+			<day_of_week data="Mon"/>
+			<low data="5"/>
+			<high data="13"/>
+			<icon data="/ig/images/weather/mostly_sunny.gif"/>
+			<condition data="Mostly Sunny"/>
+		</forecast_conditions>
+		<forecast_conditions>
+			<day_of_week data="Tue"/>
+			<low data="4"/>
+			<high data="16"/>
+			<icon data="/ig/images/weather/mostly_sunny.gif"/>
+			<condition data="Mostly Sunny"/>
+		</forecast_conditions>
+	</weather>
+</xml_api_reply>

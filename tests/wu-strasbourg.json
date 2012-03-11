@@ -1,0 +1,522 @@
+// http://api.wunderground.com/api/12e96659693addd5/conditions/forecast/q/Strasbourg.json
+{
+	"response": 
+	{
+		"version": "0.1",
+		"termsofService": "http://www.wunderground.com/weather/api/d/terms.html",
+		"features": 
+		{
+			"conditions": 1,
+			"forecast": 1
+		}
+	},	
+	"current_observation": // current_weather
+	{
+		"image": 
+		{
+			"url":"http://icons-ak.wxug.com/graphics/wu2/logo_130x80.png",
+			"title":"Weather Underground",
+			"link":"http://www.wunderground.com"
+		},
+		"display_location": 
+		{
+			"full":"Strasbourg, France",
+			"city":"Strasbourg",
+			"state":"",
+			"state_name":"France",
+			"country":"FR",
+			"country_iso3166":"FR",
+			"zip":"00000",
+			"latitude":"48.54999924",
+			"longitude":"7.63000011",
+			"elevation":"154.00000000"
+		},
+		"observation_location": 
+		{
+			"full":"Strasbourg, ",
+			"city":"Strasbourg",
+			"state":"",
+			"country":"FR",
+			"country_iso3166":"FR",
+			"latitude":"48.54999924",
+			"longitude":"7.63000011",
+			"elevation":"505 ft"
+		},
+		"estimated": 
+		{
+		},
+		"station_id":"LFST",
+		"observation_time":"Last Updated on March 10, 9:00 PM CET",
+		"observation_time_rfc822":"Sat, 10 Mar 2012 21:00:00 +0100",
+		"observation_epoch":"1331409600",
+		"local_time_rfc822":"Sat, 10 Mar 2012 21:20:32 +0100",
+		"local_epoch":"1331410832",
+		"local_tz_short":"CET",
+		"local_tz_long":"Europe/Paris",
+		"local_tz_offset":"+0100",
+		"weather":"Mostly Cloudy",
+		"temperature_string":"46 F (8 C)",
+		"temp_f":46,
+		"temp_c":8,
+		"relative_humidity":"71%",
+		"wind_string":"From the NW at 4 MPH",
+		"wind_dir":"NW",
+		"wind_degrees":320,
+		"wind_mph":4,
+		"wind_gust_mph":0,
+		"wind_kph":6,
+		"wind_gust_kph":0,
+		"pressure_mb":"1034",
+		"pressure_in":"30.54",
+		"pressure_trend":"0",
+		"dewpoint_string":"37 F (3 C)",
+		"dewpoint_f":37,
+		"dewpoint_c":3,
+		"heat_index_string":"NA",
+		"heat_index_f":"NA",
+		"heat_index_c":"NA",
+		"windchill_string":"45 F (7 C)",
+		"windchill_f":"45",
+		"windchill_c":"7",
+		"visibility_mi":"6.2",
+		"visibility_km":"10.0",
+		"solarradiation":"",
+		"UV":"0",
+		"precip_1hr_string":"-9999.00 in (-9999.00 mm)",
+		"precip_1hr_in":"-9999.00",
+		"precip_1hr_metric":"-9999.00",
+		"precip_today_string":"0.00 in (0.0 mm)",
+		"precip_today_in":"0.00",
+		"precip_today_metric":"0.0",
+		"icon":"mostlycloudy",
+		"icon_url":"http://icons-ak.wxug.com/i/c/k/nt_mostlycloudy.gif",
+		"forecast_url":"http://www.wunderground.com/global/stations/07190.html",
+		"history_url":"http://www.wunderground.com/history/airport/LFST/2012/3/10/DailyHistory.html",
+		"ob_url":"http://www.wunderground.com/cgi-bin/findweather/getForecast?query=48.54999924,7.63000011"
+	},
+	"forecast": 
+	{
+		"txt_forecast": 
+		{
+			"date":"1:00 AM CET",
+			"forecastday": 
+			[
+				{
+					"period":0,
+					"icon":"partlycloudy",
+					"icon_url":"http://icons-ak.wxug.com/i/c/k/partlycloudy.gif",
+					"title":"Saturday",
+					"fcttext":"Mostly cloudy in the morning, then overcast. High of 55F. Winds less than 5 mph.",
+					"fcttext_metric":"Mostly cloudy in the morning, then overcast. High of 13C. Winds less than 5 km/h.",
+					"pop":"0"
+				},
+				{
+					"period":1,
+					"icon":"partlycloudy",
+					"icon_url":"http://icons-ak.wxug.com/i/c/k/partlycloudy.gif",
+					"title":"Saturday Night",
+					"fcttext":"Partly cloudy in the evening, then overcast. Fog overnight. Low of 41F. Winds less than 5 mph.",
+					"fcttext_metric":"Partly cloudy in the evening, then overcast. Fog overnight. Low of 5C. Winds less than 5 km/h.",
+					"pop":"0"
+				},
+				{
+					"period":2,
+					"icon":"mostlycloudy",
+					"icon_url":"http://icons-ak.wxug.com/i/c/k/mostlycloudy.gif",
+					"title":"Sunday",
+					"fcttext":"Overcast. Fog early. High of 57F. Winds from the North at 5-10 mph.",
+					"fcttext_metric":"Overcast. Fog early. High of 14C. Winds from the North at 10-15 km/h.",
+					"pop":"0"
+				},
+				{
+					"period":3,
+					"icon":"partlycloudy",
+					"icon_url":"http://icons-ak.wxug.com/i/c/k/partlycloudy.gif",
+					"title":"Sunday Night",
+					"fcttext":"Overcast in the evening, then partly cloudy. Low of 41F. Winds less than 5 mph.",
+					"fcttext_metric":"Overcast in the evening, then partly cloudy. Low of 5C. Winds less than 5 km/h.",
+					"pop":"0"
+				},
+				{
+					"period":4,
+					"icon":"partlycloudy",
+					"icon_url":"http://icons-ak.wxug.com/i/c/k/partlycloudy.gif",
+					"title":"Monday",
+					"fcttext":"Overcast in the morning, then partly cloudy. Fog early. High of 54F. Winds from the North at 5-10 mph.",
+					"fcttext_metric":"Overcast in the morning, then partly cloudy. Fog early. High of 12C. Winds from the North at 10-15 km/h.",
+					"pop":"0"
+				},
+				{
+					"period":5,
+					"icon":"partlycloudy",
+					"icon_url":"http://icons-ak.wxug.com/i/c/k/partlycloudy.gif",
+					"title":"Monday Night",
+					"fcttext":"Mostly cloudy in the evening, then partly cloudy. Fog overnight. Low of 39F. Winds from the East at 5-10 mph shifting to the North after midnight.",
+					"fcttext_metric":"Mostly cloudy in the evening, then partly cloudy. Fog overnight. Low of 4C. Winds from the East at 10-15 km/h shifting to the North after midnight.",
+					"pop":"0"
+				},
+				{
+					"period":6,
+					"icon":"partlycloudy",
+					"icon_url":"http://icons-ak.wxug.com/i/c/k/partlycloudy.gif",
+					"title":"Tuesday",
+					"fcttext":"Mostly cloudy in the morning, then partly cloudy. Fog early. High of 55F. Winds from the NNE at 5-10 mph.",
+					"fcttext_metric":"Mostly cloudy in the morning, then partly cloudy. Fog early. High of 13C. Winds from the NNE at 10-15 km/h.",
+					"pop":"0"
+				},
+				{
+					"period":7,
+					"icon":"partlycloudy",
+					"icon_url":"http://icons-ak.wxug.com/i/c/k/partlycloudy.gif",
+					"title":"Tuesday Night",
+					"fcttext":"Partly cloudy. Fog overnight. Low of 37F. Winds less than 5 mph.",
+					"fcttext_metric":"Partly cloudy. Fog overnight. Low of 3C. Winds less than 5 km/h.",
+					"pop":"0"
+				}
+			]
+		},
+		"simpleforecast": 
+		{
+			"forecastday": // forecast
+			[
+				{
+					"date": 
+					{
+						"epoch":"1331413200",
+						"pretty":"10:00 PM CET on March 10, 2012",
+						"day":10,
+						"month":3,
+						"year":2012,
+						"yday":69,
+						"hour":22,
+						"min":"00",
+						"sec":0,
+						"isdst":"0",
+						"monthname":"March",
+						"weekday_short":"Sat",
+						"weekday":"Saturday",
+						"ampm":"PM",
+						"tz_short":"CET",
+						"tz_long":"Europe/Paris"
+					},
+					"period":1,
+					"high": 
+					{
+						"fahrenheit":"55",
+						"celsius":"13"
+					},
+					"low": 
+					{
+						"fahrenheit":"41",
+						"celsius":"5"
+					},
+					"conditions":"Partly Cloudy",
+					"icon":"partlycloudy",
+					"icon_url":"http://icons-ak.wxug.com/i/c/k/partlycloudy.gif",
+					"skyicon":"partlycloudy",
+					"pop":0,
+					"qpf_allday": 
+					{
+					"in": 0.00,
+					"mm": 0.0
+					},
+					"qpf_day": 
+					{
+						"in": 0.00,
+						"mm": 0.0
+					},
+					"qpf_night": 
+					{
+						"in": 0.00,
+						"mm": 0.0
+					},
+					"snow_allday": 
+					{
+						"in": 0,
+						"cm": 0
+					},
+					"snow_day": 
+					{
+						"in": 0,
+						"cm": 0
+					},
+					"snow_night": 
+					{
+						"in": 0,
+						"cm": 0
+					},
+					"maxwind": 
+					{
+					"mph": 5,
+						"kph": 8,
+						"dir": "North",
+						"degrees": 358
+					},
+					"avewind": 
+					{
+						"mph": 3,
+						"kph": 5,
+						"dir": "SSW",
+						"degrees": 209
+					},
+					"avehumidity": 72,
+					"maxhumidity": 83,
+					"minhumidity": 58
+				},
+				{
+					"date": 
+					{
+						"epoch":"1331499600",
+						"pretty":"10:00 PM CET on March 11, 2012",
+						"day":11,
+						"month":3,
+						"year":2012,
+						"yday":70,
+						"hour":22,
+						"min":"00",
+						"sec":0,
+						"isdst":"0",
+						"monthname":"March",
+						"weekday_short":"Sun",
+						"weekday":"Sunday",
+						"ampm":"PM",
+						"tz_short":"CET",
+						"tz_long":"Europe/Paris"
+					},
+					"period":2,
+					"high": 
+					{
+						"fahrenheit":"57",
+						"celsius":"14"
+					},
+					"low": 
+					{
+						"fahrenheit":"41",
+						"celsius":"5"
+					},
+					"conditions":"Mostly Cloudy",
+					"icon":"mostlycloudy",
+					"icon_url":"http://icons-ak.wxug.com/i/c/k/mostlycloudy.gif",
+					"skyicon":"mostlycloudy",
+					"pop":0,
+					"qpf_allday": 
+					{
+						"in": 0.00,
+						"mm": 0.0
+					},
+					"qpf_day": 
+					{
+						"in": 0.00,
+						"mm": 0.0
+					},
+					"qpf_night": 
+					{
+						"in": 0.00,
+						"mm": 0.0
+					},
+					"snow_allday": 
+					{
+						"in": 0,
+						"cm": 0
+					},
+					"snow_day": 
+					{
+						"in": 0,
+						"cm": 0
+					},
+					"snow_night": 
+					{
+					"in": 0,
+					"cm": 0
+					},
+					"maxwind": 
+					{
+						"mph": 9,
+						"kph": 14,
+						"dir": "North",
+						"degrees": 9
+					},
+					"avewind": 
+					{
+						"mph": 7,
+						"kph": 11,
+						"dir": "SE",
+						"degrees": 144
+					},
+					"avehumidity": 74,
+					"maxhumidity": 96,
+					"minhumidity": 62
+				},
+				{
+					"date": 
+					{
+						"epoch":"1331586000",
+						"pretty":"10:00 PM CET on March 12, 2012",
+						"day":12,
+						"month":3,
+						"year":2012,
+						"yday":71,
+						"hour":22,
+						"min":"00",
+						"sec":0,
+						"isdst":"0",
+						"monthname":"March",
+						"weekday_short":"Mon",
+						"weekday":"Monday",
+						"ampm":"PM",
+						"tz_short":"CET",
+						"tz_long":"Europe/Paris"
+					},
+					"period":3,
+					"high": 
+					{
+						"fahrenheit":"54",
+						"celsius":"12"
+					},
+					"low": 
+					{
+						"fahrenheit":"39",
+						"celsius":"4"
+					},
+					"conditions":"Partly Cloudy",
+					"icon":"partlycloudy",
+					"icon_url":"http://icons-ak.wxug.com/i/c/k/partlycloudy.gif",
+					"skyicon":"partlycloudy",
+					"pop":0,
+					"qpf_allday": 
+					{
+						"in": 0.00,
+						"mm": 0.0
+					},
+					"qpf_day": 
+					{
+						"in": 0.00,
+						"mm": 0.0
+					},
+					"qpf_night": 
+					{
+						"in": 0.00,
+						"mm": 0.0
+					},
+					"snow_allday": 
+					{
+						"in": 0,
+						"cm": 0
+					},
+					"snow_day": 
+					{
+						"in": 0,
+						"cm": 0
+					},
+					"snow_night": 
+					{
+						"in": 0,
+						"cm": 0
+					},
+					"maxwind": 
+					{
+						"mph": 8,
+						"kph": 13,
+						"dir": "North",
+						"degrees": 10
+					},
+					"avewind": 
+					{
+						"mph": 5,
+						"kph": 8,
+						"dir": "NE",
+						"degrees": 45
+					},
+					"avehumidity": 75,
+					"maxhumidity": 93,
+					"minhumidity": 63
+				}
+				,
+				{
+					"date": 
+					{
+						"epoch":"1331672400",
+						"pretty":"10:00 PM CET on March 13, 2012",
+						"day":13,
+						"month":3,
+						"year":2012,
+						"yday":72,
+						"hour":22,
+						"min":"00",
+						"sec":0,
+						"isdst":"0",
+						"monthname":"March",
+						"weekday_short":"Tue",
+						"weekday":"Tuesday",
+						"ampm":"PM",
+						"tz_short":"CET",
+						"tz_long":"Europe/Paris"
+					},
+					"period":4,
+					"high": 
+					{
+						"fahrenheit":"55",
+						"celsius":"13"
+					},
+					"low": 
+					{
+						"fahrenheit":"37",
+						"celsius":"3"
+					},
+					"conditions":"Partly Cloudy",
+					"icon":"partlycloudy",
+					"icon_url":"http://icons-ak.wxug.com/i/c/k/partlycloudy.gif",
+					"skyicon":"partlycloudy",
+					"pop":0,
+					"qpf_allday": 
+					{
+						"in": 0.00,
+						"mm": 0.0
+					},
+					"qpf_day": 
+					{
+						"in": 0.00,
+						"mm": 0.0
+					},
+					"qpf_night": 
+					{
+						"in": 0.00,
+						"mm": 0.0
+					},
+					"snow_allday": 
+					{
+						"in": 0,
+						"cm": 0
+					},
+					"snow_day": 
+					{
+						"in": 0,
+						"cm": 0
+					},
+					"snow_night": 
+					{
+						"in": 0,
+						"cm": 0
+					},
+					"maxwind": 
+					{
+						"mph": 7,
+						"kph": 11,
+						"dir": "NNE",
+						"degrees": 26
+					},
+					"avewind": 
+					{
+						"mph": 6,
+						"kph": 10,
+						"dir": "NNE",
+						"degrees": 20
+					},
+					"avehumidity": 77,
+					"maxhumidity": 89,
+					"minhumidity": 59
+				}
+			]
+		}
+	}
+}
