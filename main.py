@@ -4,12 +4,10 @@ __author__ = 'MrMitch'
 
 from utils.TempConverter import IMPERIAL_SYSTEM, METRIC_SYSTEM
 from APIs.Google import GoogleAPI
+from APIs.WeatherUnderground import WeatherUndergroundAPI
 from sys import argv, stdout
 
-location = 'New York'
-system = METRIC_SYSTEM
-
-
+# help function
 def displayHelp():
     print 'Usage: ./main.py [-h/--help] [location] [unit-system]'
     print '\t-h/--help\t Display this message and stop the program'
@@ -17,47 +15,53 @@ def displayHelp():
     print '\tunit-system\t "m" for Metric unit system, "i" for Imperial unit system'
     exit()
 
+#print argv
 
-try:
-    if len(argv) >= 2:
+# main processing
+if len(argv) >= 4:
 
-        if argv[1] == '-h' or argv[1] == '--help':
-            displayHelp()
-        else:
-            location = argv[1]
-
-        if len(argv) >= 3:
-            system = argv[2]
-        else:
-            print 'No unit system specified.'
+    if argv[1] == '-h' or argv[1] == '--help':
+        displayHelp()
     else:
-        print 'No location specified.'
+        # unit system
+        if argv[2] == 'm':
+            system = METRIC_SYSTEM
+        else:
+            system = IMPERIAL_SYSTEM
 
-    stdout.write('Fetching weather for %s ' % location)
+        # API type
+        if argv[1] == 'g':
+            api = GoogleAPI(argv[3], system)
+        elif argv[1] == 'wu':
+            api = WeatherUndergroundAPI(argv[3], system)
+        else:
+            raise ValueError('Wrong API type %s' % argv[1])
 
-    if system == IMPERIAL_SYSTEM:
-        print 'using imperial unit system'
-    else:
-        print 'using metric unit system'
 
-    weather = GoogleAPI(location, system)
+        # no detail asked, print T° + Text + Humidity
+        if len(argv) == 4:
+            print '%s, %s with %s humidity' % (api.text(), api.temp(), api.humidity())
+        # details on current condition
+        elif len(argv) == 5:
+            if argv[4] == 'c':
+                print api.text()
+            elif argv[4] == 't':
+                print api.temp()
+            elif argv[4] == 'h':
+                print api.humidity()
+            elif argv[4] == 's':
+                print api.symbol()
+            else:
+                raise ValueError('Wrong detail parameter %s (must be either c, t, h or s)' % argv[4])
+        # forecast
+        #elif len(argv) >= 6 & (argv[4][2:].join('') == 'fc'):
 
-    print '\n## Current weather in %s ##' % weather.fullLocation()
-    print 'Temp: %s' % weather.temp()
-    print 'Humidity: %s' % weather.humidity()
-    print 'Condition (full): %s' % weather.text()
-    print 'Condition (symbolic): %s' % weather.symbol()
-    print '\n## Forecast for %s ##' % location
-    print '     '.join(weather.forecastDaysList())
-    print ' '.join(weather.forecastTemperaturesList())
-    print ' ' + '       '.join(weather.forecastSymbolsList())
 
-    future = 2
-    
-    print '\nin %i days we are: ' % future + weather.forecastDay(future)
-    print 'forecast temps are: ' + weather.forecastTemperatures(future)
-    print 'forecast condition is: ' + weather.forecastText(future)
-    print 'forecast symbol is: ' + weather.forecastSymbol(future)
 
-except Exception:
-    print 'Wrong parameters. Try "./main.py -h" or "./main.py --help" for more information.'
+
+
+
+
+
+else:
+    raise ValueError('You must select at least an API, a unit-system and a geolocation.')
