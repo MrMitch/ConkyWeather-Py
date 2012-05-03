@@ -48,6 +48,9 @@ if argumentsNumber >= 4:
     # third case: forecast
     elif argumentsNumber >= 6:
 
+        if argv[4] not in ['t', 'c', 's', 'd']:
+            raise ValueError('Wrong forecast parameter %s (must be either c, t, s or d)')
+
         # for one day
         if argumentsNumber == 6:
             if argv[4] == 't':
@@ -56,10 +59,8 @@ if argumentsNumber >= 4:
                 print api.forecastText(int(argv[5]))
             elif argv[4] == 's':
                 print api.forecastSymbol(int(argv[5]))
-            elif argv[4] == 'd':
-                print api.forecastDay(int(argv[5]))
             else:
-                raise ValueError('Wrong forecast parameter %s (must be either fcc, fct, fcs or fcd)')
+                print api.forecastDay(int(argv[5]))
 
         # for several days
         elif argumentsNumber >= 7:
@@ -69,10 +70,8 @@ if argumentsNumber >= 4:
                 forecast = api.forecastTextsList()
             elif argv[4] == 's':
                 forecast = api.forecastSymbolsList()
-            elif argv[4] == 'd':
-                forecast = api.forecastDaysList()
             else:
-                raise ValueError('Wrong forecast parameter %s (must be either c, t, s or d)')
+                forecast = api.forecastDaysList()
 
             # from today
             if argumentsNumber == 7:
