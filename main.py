@@ -2,15 +2,16 @@
 # -*- coding: utf-8 -*-
 __author__ = 'MrMitch'
 
-from utils.TempConverter import IMPERIAL_SYSTEM, METRIC_SYSTEM
-from APIs.Google import GoogleAPI
-from APIs.WeatherUnderground import WeatherUndergroundAPI
 from sys import argv
 
 argumentsNumber = len(argv)
 
 # main processing
 if argumentsNumber >= 4:
+
+    from utils.TempConverter import IMPERIAL_SYSTEM, METRIC_SYSTEM
+    from APIs.Google import GoogleAPI
+    from APIs.WeatherUnderground import WeatherUndergroundAPI
 
     # unit system
     if argv[2] == 'm':
