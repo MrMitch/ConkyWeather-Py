@@ -130,7 +130,7 @@ class GoogleAPI(BaseAPI):
                     low = celsiusToFahrenheit(low)
                     high = celsiusToFahrenheit(high)
 
-                self.__tempsList.append(str(low) + u'°/' + str(high) + u'°')
+                self.__tempsList.append(str(high) + u'°/' + str(low) + u'°')
 
         return self.__tempsList
 
@@ -152,7 +152,7 @@ class GoogleAPI(BaseAPI):
         return self.__temp
 
 
-    def text(self):
+    def condition(self):
         if self.__text == '':
             self.__text = self.__currentWeather.getElementsByTagName('condition')[0].getAttribute('data')
         return self.__text
@@ -161,7 +161,7 @@ class GoogleAPI(BaseAPI):
 
     def symbol(self):
         if self.__symbol == '':
-            self.__symbol = self._textualToSymbolCondition(self.text())
+            self.__symbol = self._textualToSymbolCondition(self.condition())
 
         return self.__symbol
 

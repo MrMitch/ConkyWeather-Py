@@ -67,7 +67,7 @@ class BaseAPI:
     def temp(self):
         pass
 
-    def text(self):
+    def condition(self):
         pass
 
     def symbol(self):

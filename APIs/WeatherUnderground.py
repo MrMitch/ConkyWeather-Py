@@ -82,7 +82,7 @@ class WeatherUndergroundAPI(BaseAPI):
 
 
 
-    def text(self):
+    def condition(self):
         if self.__text == '':
             self.__text = self.__currentWeather['weather']
         return self.__text
@@ -137,6 +137,6 @@ class WeatherUndergroundAPI(BaseAPI):
                     low = forecast['low']['celsius']
                     high = forecast['high']['celsius']
 
-                self.__tempsList.append(str(low) + u'°/' + str(high) + u'°')
+                self.__tempsList.append(str(high) + u'°/' + str(low) + u'°')
 
         return self.__tempsList
