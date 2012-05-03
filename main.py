@@ -71,7 +71,7 @@ if argumentsNumber >= 4:
             elif argv[4] == 'd':
                 forecast = api.forecastDaysList()
             else:
-                raise ValueError('Wrong forecast parameter %s (must be either fcc, fct, fcs or fcd)')
+                raise ValueError('Wrong forecast parameter %s (must be either c, t, s or d)')
 
             # from today
             if argumentsNumber == 7:
