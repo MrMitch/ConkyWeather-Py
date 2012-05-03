@@ -37,7 +37,7 @@ if argumentsNumber >= 4:
         if argv[4] == 'c':
             print api.condition()
         elif argv[4] == 't':
-            print api.temp()
+            print api.temp().encode('utf-8')
         elif argv[4] == 'h':
             print api.humidity()
         elif argv[4] == 's':
@@ -83,7 +83,7 @@ if argumentsNumber >= 4:
                 end = int(argv[6])
 
             # use the last argument as selector
-            print argv[argumentsNumber-1].join(forecast[start:end])
+            print argv[argumentsNumber-1].join(forecast[start:end]).encode('utf-8')
 
 elif argumentsNumber == 2:
     import utils.Help as Help
