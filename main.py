@@ -2,55 +2,96 @@
 # -*- coding: utf-8 -*-
 __author__ = 'MrMitch'
 
-from utils.TempConverter import IMPERIAL_SYSTEM, METRIC_SYSTEM
-from providers.GoogleAPI import GoogleAPI
-from sys import argv, stdout
+from sys import argv
 
-location = 'New York'
-system = METRIC_SYSTEM
+argumentsNumber = len(argv)
 
+# main processing
+if argumentsNumber >= 4:
 
-def displayHelp():
-    print 'Usage: ./main.py [-h/--help] [location] [unit-system]'
-    print '\t-h/--help\t Display this message and stop the program'
-    print '\tlocation\t The name of the location where you\' like to know what\'s the weather like'
-    print '\tunit-system\t "m" for Metric unit system, "i" for Imperial unit system'
-    exit()
+    from utils.TempConverter import IMPERIAL_SYSTEM, METRIC_SYSTEM
+    from APIs.Google import GoogleAPI
+    from APIs.WeatherUnderground import WeatherUndergroundAPI
 
-
-try:
-    if len(argv) >= 2:
-
-        if argv[1] == '-h' or argv[1] == '--help':
-            displayHelp()
-        else:
-            location = argv[1]
-
-        if len(argv) >= 3:
-            system = argv[2]
-        else:
-            print 'No unit system specified.'
+    # unit system
+    if argv[2] == 'm':
+        system = METRIC_SYSTEM
     else:
-        print 'No location specified.'
+        system = IMPERIAL_SYSTEM
 
-    stdout.write('Fetching weather for %s ' % location)
-
-    if system == IMPERIAL_SYSTEM:
-        print 'using imperial unit system'
+    # API type
+    if argv[1] == 'g':
+        api = GoogleAPI(argv[3], system)
+    elif argv[:2] == 'wu':
+        api = WeatherUndergroundAPI(argv[2:], argv[3], system)
     else:
-        print 'using metric unit system'
+        raise ValueError('Wrong API type %s' % argv[1])
 
-    weather = GoogleAPI(location, system)
 
-    print '\n## Current weather in %s ##' % weather.fullLocation()
-    print 'Temp: %s' % weather.temp()
-    print 'Humidity: %s' % weather.humidity()
-    print 'Condition (full): %s' % weather.textualCondition()
-    print 'Condition (symbolic): %s' % weather.symbolicCondition()
-    print '\n## Forecast for %s ##' % location
-    print '     '.join(weather.forecastDaysList())
-    print ' '.join(weather.forecastTemperaturesList())
-    print ' ' + '       '.join(weather.forecastSymbolsList())
+    # first case: no detail asked, print T° + Text + Humidity
+    if argumentsNumber == 4:
+        print '%s, %s with %s humidity' % (api.condition(), api.temp(), api.humidity())
 
-except Exception:
-    print 'Wrong parameters. Try "./main.py -h" or "./main.py --help" for more information.'
+    # second case: details on current condition
+    elif argumentsNumber == 5:
+        if argv[4] == 'c':
+            print api.condition()
+        elif argv[4] == 't':
+            print api.temp().encode('utf-8')
+        elif argv[4] == 'h':
+            print api.humidity()
+        elif argv[4] == 's':
+            print api.symbol()
+        else:
+            raise ValueError('Wrong detail parameter %s (must be either c, t, h or s)' % argv[4])
+
+    # third case: forecast
+    elif argumentsNumber >= 6:
+
+        if argv[4] not in ['t', 'c', 's', 'd']:
+            raise ValueError('Wrong forecast parameter %s (must be either c, t, s or d)')
+
+        # for one day
+        if argumentsNumber == 6:
+            if argv[4] == 't':
+                print api.forecastTemperatures(int(argv[5]))
+            elif argv[4] == 'c':
+                print api.forecastText(int(argv[5]))
+            elif argv[4] == 's':
+                print api.forecastSymbol(int(argv[5]))
+            else:
+                print api.forecastDay(int(argv[5]))
+
+        # for several days
+        elif argumentsNumber >= 7:
+            if argv[4] == 't':
+                forecast = api.forecastTemperaturesList()
+            elif argv[4] == 'c':
+                forecast = api.forecastTextsList()
+            elif argv[4] == 's':
+                forecast = api.forecastSymbolsList()
+            else:
+                forecast = api.forecastDaysList()
+
+            # from today
+            if argumentsNumber == 7:
+                start = 0
+                end = int(argv[5])
+            # from any day
+            else:
+                start = int(argv[5])
+                end = int(argv[6])
+
+            # use the last argument as selector
+            print argv[argumentsNumber-1].join(forecast[start:end]).encode('utf-8')
+
+elif argumentsNumber == 2:
+    import utils.Help as Help
+    if argv[1] == '-h':
+        Help.short(argv[0])
+    elif argv[1] == '--help':
+        Help.long(argv[0])
+    else:
+        raise ValueError('Wrong argument "%s". Try "-h" for short help or "--help" for verbose help') % argv[1]
+else:
+    raise ValueError('You must provide at least an API, a unit-system and a geolocation.')
